@@ -1,6 +1,6 @@
 import React from "react";
-import About from "./pages/About";
 import Home from "./pages/Home";
+import About from "./pages/Option";
 
 interface Routes {
   title: string;
@@ -16,7 +16,7 @@ const routes: Routes[] = [
   },
   {
     title: "About",
-    url: "/about",
+    url: "/options",
     component: About,
   },
 ];

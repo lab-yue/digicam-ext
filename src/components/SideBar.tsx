@@ -1,47 +1,71 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Link } from "react-router-dom";
-import routes from "../Routes";
-import { colors } from "../Theme";
 
-const GlobalSideBar = styled.aside`
+const SidebarContainer = styled.aside`
   width: 20%;
-  height: 100%;
-  background-color: #efefef;
-  border-right: 3px solid ${colors.bisque};
+  max-width: 200px;
+  padding: 30px;
+  border-right: 1px solid #eee;
 `;
 
-const NavigatorList = styled.ul`
+const Sticky = styled.div`
+  position: sticky;
+  top: 30px;
+`;
+
+const PresetList = styled.ul`
+  transition: 0.5s all ease-in-out;
   color: #000;
+  list-style: none;
+  padding: 0;
   text-align: left;
 `;
-
-const NavigatorItem = styled.li`
+interface PresetProps {
+  active: boolean;
+}
+const Preset = styled.li<PresetProps>`
   transition: 0.3s all ease-in-out;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: ${(props) => (props.active ? "#ddd" : "")};
   &:hover {
-    background-color: ${colors.lightseagreen};
+    background-color: ${(props) => (props.active ? "#ddd" : "#eee")};
   }
 `;
 
-const NavigatorText = styled.span`
-  padding: 5px 15px;
+const PresetText = styled.span`
+  padding: 3px 10px;
   display: block;
   color: #000;
-  font-size: 24px;
+  font-size: 20px;
 `;
 
-export default function SideBar() {
+interface SidebarProps {
+  items: string[];
+  active: number;
+  onSelect(item: number): void;
+  onCreate(): void;
+}
+
+export default function Sidebar({
+  active,
+  items,
+  onSelect,
+  onCreate,
+}: SidebarProps) {
   return (
-    <GlobalSideBar>
-      <NavigatorList>
-        {routes.map((route, key) => (
-          <NavigatorItem key={`sidebar-${key}`}>
-            <Link to={route.url}>
-              <NavigatorText>{route.title}</NavigatorText>
-            </Link>
-          </NavigatorItem>
-        ))}
-      </NavigatorList>
-    </GlobalSideBar>
+    <SidebarContainer>
+      <Sticky>
+        <PresetList>
+          {items.map((preset, i) => (
+            <Preset active={active === i} key={`preset-${i}`}>
+              <PresetText onClick={() => onSelect(i)}>{preset}</PresetText>
+            </Preset>
+          ))}
+        </PresetList>
+        <PresetText onClick={onCreate}>+</PresetText>
+      </Sticky>
+    </SidebarContainer>
   );
 }

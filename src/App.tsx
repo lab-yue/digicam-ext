@@ -1,22 +1,33 @@
+import { css, Global } from "@emotion/core";
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Layout from "./Layout";
-import Routes from "./Routes";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import routes from "./Routes";
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Layout>
+    <>
+      <Global
+        styles={css`
+          html,
+          body {
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+          }
+        `}
+      />
+      <HashRouter>
         <Switch>
-          {Routes.map((route, key) => (
+          {routes.map((route, i) => (
             <Route
               exact
-              key={`route-${key}`}
-              path={process.env.PUBLIC_URL + route.url}
+              key={`r-${i}`}
+              path={route.url}
               component={route.component}
             />
           ))}
         </Switch>
-      </Layout>
-    </BrowserRouter>
+      </HashRouter>
+    </>
   );
 }
