@@ -22,6 +22,7 @@
     "build": "react-scripts build && tsc chrome/*.ts && mv chrome/*.js build",
     "build/inject": "tsc chrome/*.ts && mv chrome/*.js build",
     "eject": "react-scripts eject",
+    "zip": "zip -r digicam-ext.zip build/*",
     "lint": "tslint --project . --fix"
   },
   "eslintConfig": {
