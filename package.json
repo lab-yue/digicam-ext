@@ -20,6 +20,7 @@
   "scripts": {
     "dev": "react-scripts start",
     "build": "react-scripts build && tsc src/Inject.ts && mv src/Inject.js build/inject.js",
+    "build/inject": "tsc src/Inject.ts && mv src/Inject.js build/inject.js",
     "eject": "react-scripts eject",
     "lint": "tslint --project . --fix"
   },

@@ -56,7 +56,6 @@ const OptionButton = styled.button`
   }
 `;
 export default function Home() {
-
   const openOptions = () => {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
@@ -68,7 +67,6 @@ export default function Home() {
   const [presets, setPresets] = useState<Preset[]>([]);
 
   useEffect(() => {
-    store.initPresets();
     const initData = async () => {
       const data = await store.getPresets();
       setPresets(data);
@@ -81,7 +79,7 @@ export default function Home() {
       return;
     }
 
-    const preset = {...presets[i]};
+    const preset = { ...presets[i] };
 
     Object.entries(preset).map(([k, v]) => {
       if (v === "-1") {
@@ -97,9 +95,9 @@ export default function Home() {
 
     chrome.tabs.executeScript(
       {
-        code: "window.injectedPreset = " + JSON.stringify(presets[i]),
+        code: "window.injectedPreset = " + JSON.stringify(preset)
       },
-      () => chrome.tabs.executeScript({ file: "inject.js" }),
+      () => chrome.tabs.executeScript({ file: "inject.js" })
     );
   };
 

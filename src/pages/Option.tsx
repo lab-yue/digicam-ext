@@ -15,16 +15,12 @@ const Main = styled.main`
 `;
 
 export default function Options() {
-
   const [active, setActive] = useState(-1);
   const [presets, setPresets] = useState<Preset[]>([]);
 
   useEffect(() => {
     const initData = async () => {
       const data = await store.getPresets();
-      // console.log('useEffect>>>')
-      // console.log(data);
-      // console.log('<<<')
       setPresets(data);
     };
     initData();
@@ -39,7 +35,7 @@ export default function Options() {
     setActive(index);
   };
 
-  const handleEmit = (p: Preset) => {
+  const handleChange = (p: Preset) => {
     const clone = [...presets];
     clone[active] = p;
     set(clone);
@@ -57,7 +53,7 @@ export default function Options() {
     set([...presets, defaultOptions]);
   };
 
-  const presetNames = Object.values(presets).map((p) => p.name);
+  const presetNames = Object.values(presets).map(p => p.name);
 
   return (
     <Flex>
@@ -71,7 +67,7 @@ export default function Options() {
         {showSettings && (
           <Settings
             preset={presets[active]}
-            emit={(e) => handleEmit(e)}
+            onChange={e => handleChange(e)}
             handleDelete={handleDelete}
           />
         )}
