@@ -90,9 +90,12 @@ export default function Home() {
 
     chrome.tabs.executeScript(
       {
-        code: "window.injectedPreset = " + JSON.stringify(preset),
+        code: "window.injectedPreset = " + JSON.stringify(preset)
       },
-      () => chrome.tabs.executeScript({ file: "inject.js" }),
+      () => {
+        chrome.tabs.executeScript({ file: "inject.js" });
+        window.close();
+      }
     );
   };
 

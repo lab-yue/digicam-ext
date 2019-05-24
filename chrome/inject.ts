@@ -31,5 +31,3 @@ if (selectors.length) {
 if (preset.after !== "0") {
   next.click();
 }
-
-window.close();
