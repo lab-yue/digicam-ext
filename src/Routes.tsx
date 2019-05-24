@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "./pages/Home";
-import About from "./pages/Option";
+import About from "./pages/Options";
 
 interface Routes {
   title: string;

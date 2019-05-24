@@ -34,7 +34,7 @@ interface SettingsProps {
 export default function Settings({
   preset,
   onChange,
-  handleDelete
+  handleDelete,
 }: SettingsProps) {
   if (!preset) {
     return <></>;
@@ -48,7 +48,7 @@ export default function Settings({
 
       <InputArea
         value={preset.name}
-        onChange={e => onChange({ ...preset, name: e.target.value })}
+        onChange={(e) => onChange({ ...preset, name: e.target.value })}
       />
 
       <h2>授業への参加状況について回答してください</h2>
@@ -56,7 +56,7 @@ export default function Settings({
         options={questions.q1}
         name="q1"
         focus={preset.q1}
-        onChange={q1 => onChange({ ...preset, q1 })}
+        onChange={(q1) => onChange({ ...preset, q1 })}
       />
 
       <h2>授業内容を理解できましたか?</h2>
@@ -64,7 +64,7 @@ export default function Settings({
         options={questions.q2}
         name="q2"
         focus={preset.q2}
-        onChange={q2 => onChange({ ...preset, q2 })}
+        onChange={(q2) => onChange({ ...preset, q2 })}
       />
 
       <h2>授業に興味を持てましたか?</h2>
@@ -72,7 +72,7 @@ export default function Settings({
         options={questions.q3}
         name="q3"
         focus={preset.q3}
-        onChange={q3 => onChange({ ...preset, q3 })}
+        onChange={(q3) => onChange({ ...preset, q3 })}
       />
 
       <h2>次回の授業に向けて準備するべきこと・学ぶべきことを理解しましたか?</h2>
@@ -80,16 +80,16 @@ export default function Settings({
         options={questions.q4}
         name="q4"
         focus={preset.q4}
-        onChange={q4 => onChange({ ...preset, q4 })}
+        onChange={(q4) => onChange({ ...preset, q4 })}
       />
 
       <h2>次回の授業に向けて準備するべきこと・学ぶべきことを理解しましたか?</h2>
       <TextArea
         value={preset.text1}
-        onChange={e =>
+        onChange={(e) =>
           onChange({
             ...preset,
-            text1: (e.target as HTMLTextAreaElement).value
+            text1: (e.target as HTMLTextAreaElement).value,
           })
         }
       />
@@ -97,10 +97,10 @@ export default function Settings({
       <h2>今日の授業の良かった点、要望があれば、あげてください。</h2>
       <TextArea
         value={preset.text2}
-        onChange={e =>
+        onChange={(e) =>
           onChange({
             ...preset,
-            text2: (e.target as HTMLTextAreaElement).value
+            text2: (e.target as HTMLTextAreaElement).value,
           })
         }
       />
@@ -110,7 +110,7 @@ export default function Settings({
         options={questions.after}
         name="after"
         focus={preset.after}
-        onChange={after => onChange({ ...preset, after })}
+        onChange={(after) => onChange({ ...preset, after })}
       />
       <h2>プリセットを削除</h2>
       <DeleteButton onClick={() => handleDelete()}>Delete</DeleteButton>

@@ -6,6 +6,7 @@ import { defaultOptions, Preset } from "../helpers/options";
 import store from "../helpers/store";
 
 const Flex = styled.div`
+  position: relative;
   display: flex;
   margin: 30px 0;
 `;
@@ -17,6 +18,10 @@ const Main = styled.main`
 export default function Options() {
   const [active, setActive] = useState(-1);
   const [presets, setPresets] = useState<Preset[]>([]);
+  const [indicator, setIndicator] = useState({
+    text: "",
+    typing: false,
+  });
 
   useEffect(() => {
     const initData = async () => {
@@ -29,6 +34,22 @@ export default function Options() {
   const set = (newPresets: Preset[]) => {
     setPresets(newPresets);
     store.setPresets(newPresets);
+
+    // fake throttle indicator
+    if (!indicator.typing) {
+      let isTyping;
+      clearTimeout(isTyping);
+      setIndicator({ text: "入力中...", typing: true });
+
+      isTyping = setTimeout(() => {
+        const time = new Date().toTimeString().split(" ")[0];
+        setIndicator({
+          typing: false,
+          text: `${time}
+           保存しました`,
+        });
+      }, 1000);
+    }
   };
 
   const handleSelect = (index: number) => {
@@ -53,12 +74,13 @@ export default function Options() {
     set([...presets, defaultOptions]);
   };
 
-  const presetNames = Object.values(presets).map(p => p.name);
+  const presetNames = Object.values(presets).map((p) => p.name);
 
   return (
     <Flex>
       <Sidebar
         active={active}
+        status={indicator.text}
         items={presetNames}
         onSelect={handleSelect}
         onCreate={createNewPreset}
@@ -67,7 +89,7 @@ export default function Options() {
         {showSettings && (
           <Settings
             preset={presets[active]}
-            onChange={e => handleChange(e)}
+            onChange={(e) => handleChange(e)}
             handleDelete={handleDelete}
           />
         )}

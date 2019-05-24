@@ -7,7 +7,7 @@ const defaultOptions = {
   q4: "12",
   text1: "特にありません",
   text2: "特にありません",
-  after: "0"
+  after: "0",
 };
 
 type Preset = typeof defaultOptions;
@@ -25,9 +25,11 @@ if (textboxs) {
 }
 
 if (selectors.length) {
-  selectorAnswers.map(i => selectors[parseInt(i, 10)].click());
+  selectorAnswers.map((i) => selectors[parseInt(i, 10)].click());
 }
 
 if (preset.after !== "0") {
   next.click();
 }
+
+window.close();

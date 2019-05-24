@@ -6,11 +6,13 @@ const SidebarContainer = styled.aside`
   max-width: 200px;
   padding: 30px;
   border-right: 1px solid #eee;
+  position: relative;
 `;
 
 const Sticky = styled.div`
   position: sticky;
   top: 30px;
+  max-height: 75vh;
 `;
 
 const PresetList = styled.ul`
@@ -39,10 +41,29 @@ const PresetText = styled.span`
   display: block;
   color: #000;
   font-size: 20px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
+const AddNew = styled(PresetText)`
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: #eee;
+  }
+`;
+
+const Indicator = styled.span`
+  position: fixed;
+  white-space: pre-line;
+  bottom: 2rem;
+  color: #888;
+  z-index: 10;
 `;
 
 interface SidebarProps {
   items: string[];
+  status: string;
   active: number;
   onSelect(item: number): void;
   onCreate(): void;
@@ -50,6 +71,7 @@ interface SidebarProps {
 
 export default function Sidebar({
   active,
+  status,
   items,
   onSelect,
   onCreate,
@@ -64,8 +86,9 @@ export default function Sidebar({
             </Preset>
           ))}
         </PresetList>
-        <PresetText onClick={onCreate}>+</PresetText>
+        <AddNew onClick={onCreate}>+</AddNew>
       </Sticky>
+      <Indicator>{status}</Indicator>
     </SidebarContainer>
   );
 }

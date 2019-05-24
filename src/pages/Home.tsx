@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useState } from "react";
-import { questions } from "../helpers/options";
+import { Preset, questions } from "../helpers/options";
 import store from "../helpers/store";
 const HomeLayout = styled.div`
   background-color: #333;
@@ -38,21 +38,16 @@ const Button = styled.button`
 
 const OptionButton = styled.button`
   display: inline-block;
-  color: #fff;
+  color: #ccc;
   font-size: 20px;
-  border: 2px solid #eee;
-  border-bottom: 5px solid #ccc;
-  border-radius: 10px;
+  border: 0;
   margin: 10px;
   padding: 5px;
   transition: 0.3s all cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
   background-color: transparent;
   &:hover {
-    background-color: #555;
-  }
-  &:active {
-    border-bottom: 3px solid #ccc;
+    color: #fff;
   }
 `;
 export default function Home() {
@@ -95,9 +90,9 @@ export default function Home() {
 
     chrome.tabs.executeScript(
       {
-        code: "window.injectedPreset = " + JSON.stringify(preset)
+        code: "window.injectedPreset = " + JSON.stringify(preset),
       },
-      () => chrome.tabs.executeScript({ file: "inject.js" })
+      () => chrome.tabs.executeScript({ file: "inject.js" }),
     );
   };
 
