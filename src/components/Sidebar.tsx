@@ -20,6 +20,7 @@ const PresetList = styled.ul`
   color: #000;
   list-style: none;
   padding: 0;
+  margin-top: 0;
   text-align: left;
 `;
 interface PresetProps {
@@ -61,16 +62,32 @@ const Indicator = styled.span`
   z-index: 10;
 `;
 
+const SectionTitle = styled.h3`
+  margin-bottom: 0.4rem;
+`;
+export type SidebarSelectEventType = "preset" | "calendar";
+
+export type SidebarSelectEvent =
+  | {
+      type: "preset";
+      item: number;
+    }
+  | {
+      type: "calendar";
+    };
+
 interface SidebarProps {
   items: string[];
+  showType: SidebarSelectEventType;
   status: string;
   active: number;
-  onSelect(item: number): void;
+  onSelect(e: SidebarSelectEvent): void;
   onCreate(): void;
 }
 
 export default function Sidebar({
   active,
+  showType,
   status,
   items,
   onSelect,
@@ -79,10 +96,21 @@ export default function Sidebar({
   return (
     <SidebarContainer>
       <Sticky>
+        <SectionTitle>カレンダー</SectionTitle>
+        <PresetList>
+          <Preset active={showType === "calendar"}>
+            <PresetText onClick={() => onSelect({ type: "calendar" })}>
+              設定
+            </PresetText>
+          </Preset>
+        </PresetList>
+        <SectionTitle>プリセット</SectionTitle>
         <PresetList>
           {items.map((preset, i) => (
             <Preset active={active === i} key={`preset-${i}`}>
-              <PresetText onClick={() => onSelect(i)}>{preset}</PresetText>
+              <PresetText onClick={() => onSelect({ type: "preset", item: i })}>
+                {preset}
+              </PresetText>
             </Preset>
           ))}
         </PresetList>

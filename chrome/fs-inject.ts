@@ -1,4 +1,3 @@
-// @ts-ignore
 const defaultOptions = {
   name: "新規プリセット",
   q1: "1",
@@ -9,14 +8,12 @@ const defaultOptions = {
   text2: "特にありません",
   after: "0",
 };
-
-type Preset = typeof defaultOptions;
 // @ts-ignore
-const params = window.injectedPreset;
-const preset: Preset = params ? params : defaultOptions;
+const params = window.injectedProps;
+const preset = params ? params : defaultOptions;
 const selectorAnswers = [preset.q1, preset.q2, preset.q3, preset.q4];
 const textboxs = document.querySelectorAll("textarea");
-const next = document.querySelector(".btnNext") as HTMLButtonElement;
+const next = document.querySelector(".btnNext");
 const selectors = Array.from(document.querySelectorAll("input"));
 
 if (textboxs) {
@@ -29,5 +26,6 @@ if (selectors.length) {
 }
 
 if (preset.after !== "0") {
+  // @ts-ignore
   next.click();
 }

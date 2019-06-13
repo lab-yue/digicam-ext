@@ -1,5 +1,5 @@
+import { Calendar } from "../components/CalendarSetting";
 import { defaultOptions, Preset } from "./options";
-
 async function getPresets() {
   // if (!chrome || !chrome.storage) {
   //  console.log("???");
@@ -47,7 +47,27 @@ function setPresets(presets: Preset[]) {
   chrome.storage.sync.set({ presets });
 }
 
+async function getCalendar() {
+  return new Promise<Calendar>((resolve, reject) => {
+    chrome.storage.sync.get(["calendar"], (res) => {
+      if (!res) {
+        reject(new Error("no calendar data!"));
+      }
+      resolve(res.calendar || { start: "2019-6-10", index: 80 });
+    });
+  });
+}
+
+function setCalendar(calendar: Calendar) {
+  // if (!chrome || !chrome.storage) {
+  //  return;
+  // }
+  chrome.storage.sync.set({ calendar });
+}
+
 export default {
   getPresets,
   setPresets,
+  getCalendar,
+  setCalendar,
 };
