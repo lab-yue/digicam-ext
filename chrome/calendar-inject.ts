@@ -76,8 +76,8 @@ const getDate = (days: number) => {
 const toGoogleEvent = (l: Lecture) => {
   const time = timeMap[l.time as keyof TimeMap];
   const date = getDate(l.day)
-    .toLocaleString()
-    .split(",")[0];
+    .toISOString()
+    .split("T")[0];
   return {
     Subject: l.title,
     "Start Time": time[0],
