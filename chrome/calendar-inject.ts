@@ -69,7 +69,7 @@ rows.map((row, time) => {
 });
 const getDate = (days: number) => {
   const result = new Date(start);
-  result.setDate(result.getDate() - 1 + days);
+  result.setDate(result.getDate() + days);
   return result;
 };
 

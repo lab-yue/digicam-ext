@@ -25,7 +25,8 @@
   },
   "include": [
     "src",
-    "chrome"
+    "chrome",
+    "test"
   ],
   "rules": {
     "no-console": false,
