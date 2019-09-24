@@ -1,6 +1,6 @@
 {
   "name": "デジキャンヘルパー",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "manifest_version": 2,
   "description": "自動化ツール for デジキャン",
   "homepage_url": "https://github.com/rainy-me/digicam-ext",
