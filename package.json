@@ -25,7 +25,7 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "build": "react-scripts build && tsc chrome/*.ts && mv chrome/*.js build",
+    "build": "react-scripts build && tsc -t es6 --outDir build --moduleResolution node chrome/*.ts",
     "build/inject": "tsc chrome/*.ts && mv chrome/*.js build",
     "eject": "react-scripts eject",
     "zip": "zip -r digicam-ext.zip build/*",
